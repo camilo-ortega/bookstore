@@ -1,6 +1,7 @@
 import 'package:bookstore/ui/helpers/screen.dart';
 import 'package:bookstore/ui/providers/book_provider.dart';
 import 'package:bookstore/ui/screens/widgets/card_swiper.dart';
+import 'package:bookstore/ui/search/book_search_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.search_outlined),
               onPressed: () {
-                //TODO implement search
+                showSearch(context: context, delegate: BookSearchDelegate());
               }),
         ],
       ),

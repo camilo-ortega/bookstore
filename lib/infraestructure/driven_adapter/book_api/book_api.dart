@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:bookstore/domain/models/book/book.dart';
 import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/domain/models/book/book_new_response.dart';
+import 'package:bookstore/domain/models/book/book_search_response.dart';
 import 'package:bookstore/domain/models/book/gateway/book_gateway.dart';
 import 'package:bookstore/infraestructure/helpers/maps/book/book_details_response_mapper.dart';
 import 'package:bookstore/infraestructure/helpers/maps/book/book_new_response_mapper.dart';
@@ -17,7 +17,7 @@ class BookApi extends BookGateway {
   final BookNewResponseMapper _bookNewResponseMapper = BookNewResponseMapper();
 
   @override
-  Future<List<Book>> getBooksByQuery(String query) async {
+  Future<BookSearchResponse> getBooksByQuery(String query) async {
     final url = 'https://api.itbook.store/1.0/search/$query';
 
     final response = await http.get(Uri.parse(url));

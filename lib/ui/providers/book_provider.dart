@@ -2,6 +2,7 @@ import 'package:bookstore/config/use_case_config.dart';
 import 'package:bookstore/domain/models/book/book.dart';
 import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/domain/models/book/book_new_response.dart';
+import 'package:bookstore/domain/models/book/book_search_response.dart';
 import 'package:flutter/material.dart';
 
 class BookProvider extends ChangeNotifier {
@@ -17,9 +18,8 @@ class BookProvider extends ChangeNotifier {
     return await _useCaseConfig.getBookUseCase.getNewReleasesBooks();
   }
 
-  getBooksByQuery(String query) async {
-    booksByQuery = await _useCaseConfig.getBookUseCase.getBooksByQuery(query);
-    notifyListeners();
+  Future<BookSearchResponse> getBooksByQuery(String query) async {
+    return await _useCaseConfig.getBookUseCase.getBooksByQuery(query);
   }
 
   Future<BookDetailsResponse> getBookDetailsByISBN(String isbn13) async {

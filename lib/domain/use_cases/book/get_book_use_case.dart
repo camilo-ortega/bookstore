@@ -1,6 +1,6 @@
-import 'package:bookstore/domain/models/book/book.dart';
 import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/domain/models/book/book_new_response.dart';
+import 'package:bookstore/domain/models/book/book_search_response.dart';
 import 'package:bookstore/domain/models/book/gateway/book_gateway.dart';
 
 class GetBookUseCase {
@@ -8,7 +8,7 @@ class GetBookUseCase {
 
   final BookGateway _bookGateway;
 
-  Future<List<Book>> getBooksByQuery(String query) async {
+  Future<BookSearchResponse> getBooksByQuery(String query) async {
     return _bookGateway.getBooksByQuery(query);
   }
 

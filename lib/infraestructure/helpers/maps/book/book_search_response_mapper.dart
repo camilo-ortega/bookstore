@@ -11,7 +11,6 @@ class BookSearchResponseMapper implements BaseMapper<BookSearchResponseMapper> {
     return BookSearchResponse(
       error: json["error"],
       total: json["total"],
-      page: json["page"],
       books: List<Book>.from(json["books"].map((x) => _bookMapper.fromMap(x))),
     );
   }
