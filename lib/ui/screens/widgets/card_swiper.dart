@@ -1,4 +1,5 @@
 import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/domain/models/book/book_new_response.dart';
 import 'package:bookstore/ui/helpers/screen.dart';
 import 'package:bookstore/ui/providers/book_provider.dart';
@@ -16,6 +17,8 @@ class CardSwiper extends StatelessWidget {
     final BookProvider bookProvider = Provider.of<BookProvider>(context);
     final AppNavigator appNavigator = AppNavigator.of(context);
 
+    List<Future<BookDetailsResponse>> temp = [];
+
     return FutureBuilder(
       future: bookProvider.getNewReleasesBooks(),
       builder:
@@ -31,6 +34,10 @@ class CardSwiper extends StatelessWidget {
         }
 
         List<Book> books = snapshot.data!.books;
+
+        for (var i in books) {
+          temp.add(bookProvider.getBookDetailsByISBN(i.isbn13));
+        }
 
         return SizedBox(
           width: double.infinity,
@@ -65,7 +72,7 @@ class CardSwiper extends StatelessWidget {
                 ]),
                 itemCount: books.length > 9 ? 10 : books.length,
                 itemWidth: Screen.getWidthSize,
-                itemHeight: Screen.getHeightInPercent(50),
+                itemHeight: Screen.getHeightInPercent(55),
                 itemBuilder: (BuildContext context, int index) {
                   final book = books[index];
 
@@ -73,36 +80,35 @@ class CardSwiper extends StatelessWidget {
                     margin: EdgeInsets.all(
                       Screen.getWidthInPercent(5),
                     ),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            appNavigator.toBookDetailScreen(book);
-                          },
-                          child: Hero(
-                            tag: book.isbn13,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Column(
-                                children: [
-                                  FadeInImage(
-                                    placeholder: NetworkImage(book.image),
-                                    image: NetworkImage(book.image),
-                                    fit: BoxFit.contain,
-                                  ),
-                                ],
+                    child: Flexible(
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              appNavigator
+                                  .toBookDetailScreen(temp.elementAt(index));
+                            },
+                            child: Hero(
+                              tag: book.isbn13,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: FadeInImage(
+                                  placeholder: NetworkImage(book.image),
+                                  image: NetworkImage(book.image),
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Text(
-                          '${index + 1}',
-                          style: TextStyle(
-                            fontSize: Screen.getDiagonalInPercent(1.5),
-                            fontWeight: FontWeight.normal,
+                          Text(
+                            '${index + 1}',
+                            style: TextStyle(
+                              fontSize: Screen.getDiagonalInPercent(1.5),
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

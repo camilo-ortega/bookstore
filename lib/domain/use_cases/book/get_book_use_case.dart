@@ -1,4 +1,5 @@
 import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/domain/models/book/book_new_response.dart';
 import 'package:bookstore/domain/models/book/gateway/book_gateway.dart';
 
@@ -15,7 +16,7 @@ class GetBookUseCase {
     return _bookGateway.getNewReleasesBooks();
   }
 
-  Future<Book> getBookDetailsByISBN(String isbn13) async {
+  Future<BookDetailsResponse> getBookDetailsByISBN(String isbn13) async {
     return _bookGateway.getBookDetailsByISBN(isbn13);
   }
 }

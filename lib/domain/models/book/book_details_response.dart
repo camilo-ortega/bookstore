@@ -1,5 +1,3 @@
-import 'package:bookstore/domain/models/book/pdf.dart';
-
 class BookDetailsResponse {
   BookDetailsResponse({
     required this.error,
@@ -17,7 +15,6 @@ class BookDetailsResponse {
     required this.price,
     required this.image,
     required this.url,
-    required this.pdf,
   });
 
   String error;
@@ -35,5 +32,4 @@ class BookDetailsResponse {
   String price;
   String image;
   String url;
-  Pdf pdf;
 }

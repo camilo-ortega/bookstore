@@ -1,4 +1,4 @@
-import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_details_response.dart';
 import 'package:bookstore/ui/constants/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class AppNavigator {
 
   late final NavigatorState _navigatorState;
 
-  toBookDetailScreen(Book book) {
-    _navigatorState.pushNamed(Routes.bookDetail, arguments: book);
+  toBookDetailScreen(Future<BookDetailsResponse> bookDetail) {
+    _navigatorState.pushNamed(Routes.bookDetail, arguments: bookDetail);
   }
 }
