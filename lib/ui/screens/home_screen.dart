@@ -1,5 +1,8 @@
 import 'package:bookstore/ui/helpers/screen.dart';
+import 'package:bookstore/ui/providers/book_provider.dart';
+import 'package:bookstore/ui/screens/widgets/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,6 +11,24 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Screen.initialize(context);
 
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bookstore'),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.search_outlined),
+              onPressed: () {
+                //TODO implement search
+              }),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            CardSwiper(),
+          ],
+        ),
+      ),
+    );
   }
 }

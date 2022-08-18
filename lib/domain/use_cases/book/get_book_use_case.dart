@@ -1,4 +1,5 @@
 import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_new_response.dart';
 import 'package:bookstore/domain/models/book/gateway/book_gateway.dart';
 
 class GetBookUseCase {
@@ -10,7 +11,7 @@ class GetBookUseCase {
     return _bookGateway.getBooksByQuery(query);
   }
 
-  Future<List<Book>> getNewReleasesBooks() async {
+  Future<BookNewResponse> getNewReleasesBooks() async {
     return _bookGateway.getNewReleasesBooks();
   }
 

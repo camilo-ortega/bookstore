@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_new_response.dart';
 import 'package:bookstore/domain/models/book/gateway/book_gateway.dart';
 import 'package:bookstore/infraestructure/helpers/maps/book/book_details_response_mapper.dart';
 import 'package:bookstore/infraestructure/helpers/maps/book/book_new_response_mapper.dart';
@@ -41,8 +42,8 @@ class BookApi extends BookGateway {
   }
 
   @override
-  Future<List<Book>> getNewReleasesBooks() async {
-    const url = 'https://api.itbook.store/1.0/books/new';
+  Future<BookNewResponse> getNewReleasesBooks() async {
+    const url = 'https://api.itbook.store/1.0/new';
 
     final response = await http.get(Uri.parse(url));
 

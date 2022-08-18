@@ -1,27 +1,30 @@
 import 'package:bookstore/config/use_case_config.dart';
 import 'package:bookstore/domain/models/book/book.dart';
+import 'package:bookstore/domain/models/book/book_new_response.dart';
 import 'package:flutter/material.dart';
 
 class BookProvider extends ChangeNotifier {
-  UseCaseConfig useCaseConfig = UseCaseConfig();
+  BookProvider() {
+    getNewReleasesBooks();
+  }
+
+  final UseCaseConfig _useCaseConfig = UseCaseConfig();
 
   Book? bookDetail;
-  List<Book> newReleasesBooks = [];
   List<Book> booksByQuery = [];
 
-  getNewReleasesBooks() async {
-    newReleasesBooks = await useCaseConfig.getBookUseCase.getNewReleasesBooks();
-    notifyListeners();
+  Future<BookNewResponse> getNewReleasesBooks() async {
+    return await _useCaseConfig.getBookUseCase.getNewReleasesBooks();
   }
 
   getBooksByQuery(String query) async {
-    booksByQuery = await useCaseConfig.getBookUseCase.getBooksByQuery(query);
+    booksByQuery = await _useCaseConfig.getBookUseCase.getBooksByQuery(query);
     notifyListeners();
   }
 
   getBookDetailsByISBN(String isbn13) async {
     bookDetail =
-        await useCaseConfig.getBookUseCase.getBookDetailsByISBN(isbn13);
+        await _useCaseConfig.getBookUseCase.getBookDetailsByISBN(isbn13);
     notifyListeners();
   }
 }
